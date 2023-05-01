@@ -17,7 +17,6 @@ return {
           override_generic_sorter = true, -- override the generic sorter
           override_file_sorter = true, -- override the file sorter
           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-          -- the default case_mode is "smart_case"
         },
         undo = {
           use_delta = true,
@@ -59,8 +58,6 @@ return {
       },
     },
   },
-  --TEST COMMENT
-  --test test test
   keys = {
     {
       "<leader>fp",
@@ -74,7 +71,6 @@ return {
       function()
         require("telescope").extensions.undo.undo()
       end,
-      -- "<cmd>Telescope undo<cr>",
       desc = "Telescope undo",
     },
   },
