@@ -4,7 +4,13 @@ return {
     "nvim-lua/plenary.nvim",
   },
   keys = {
-    -- { "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end, desc="Harpoon: open menu"},
+    {
+      "<C-e>",
+      function()
+        require("harpoon.ui").toggle_quick_menu()
+      end,
+      desc = "Harpoon: open menu",
+    },
     {
       "<leader>a",
       function()

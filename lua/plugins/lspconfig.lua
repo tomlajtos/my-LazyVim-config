@@ -33,6 +33,14 @@ return {
           workingDirectory = { mode = "auto" },
         },
       },
+
+      tailwindcss = {},
+
+      bashls = {},
+
+      pyright = {},
+
+      sqlls = {},
     },
 
     setup = {
