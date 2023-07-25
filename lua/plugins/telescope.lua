@@ -30,7 +30,7 @@ return {
         },
         keys = {
           {
-            "<cr>",
+            "<M-a>",
             function()
               require("telescope-undo.actions").yank_additions()
             end,
@@ -38,7 +38,7 @@ return {
             { desc = "Telescope-Undo: yank additions" },
           },
           {
-            "<S-cr>",
+            "<S-u>",
             function()
               require("telescope-undo.actions").yank_deletions()
             end,
@@ -46,7 +46,7 @@ return {
             { desc = "Telescope-Undo: yank deletions" },
           },
           {
-            "<C-cr>",
+            "<M-u>",
             function()
               require("telescope-undo.actions").restore()
             end,
