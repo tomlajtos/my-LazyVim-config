@@ -2,7 +2,15 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = { "jose-elias-alvarez/typescript.nvim", { "b0o/SchemaStore.nvim", version = false } },
   opts = {
+    format_notify = true,
+    format = {
+      formatting_options = nil,
+      timeout_ms = 2000,
+    },
+
+    -- LSP Server Settings
     -- make sure mason installs the server
+    ---@type lspconfig.options
     servers = {
       ---@type lspconfig.options.tsserver
       tsserver = {
@@ -12,34 +20,28 @@ return {
         },
         settings = {
           typescript = {
-            format = { enable = false },
-            -- format = {
-            --   indentSize = vim.o.shiftwidth,
-            --   convertTabsToSpaces = vim.o.expandtab,
-            --   tabSize = vim.o.tabstop,
-            -- },
+            format = {
+              indentSize = vim.o.shiftwidth,
+              convertTabsToSpaces = vim.o.expandtab,
+              tabSize = vim.o.tabstop,
+            },
             inlayHints = {
               includeInlayEnumMemberValueHints = true,
               includeInlayFunctionLikeReturnTypeHints = true,
               includeInlayFunctionParameterTypeHints = true,
-              --includeInlayFunctionParameterTypeHints = false,
               includeInlayParameterNameHints = "all",
-              --includeInlayParameterNameHints = "literal",
               includeInlayParameterNameHintsWhenArgumentMatchesName = false,
               includeInlayPropertyDeclarationTypeHints = true,
-              --includeInlayPropertyDeclarationTypeHints = false,
               includeInlayVariableTypeHints = true,
-              --includeInlayVariableTypeHints = false,
               includeInlayVariableTypeHintsWhenTypeMatchesName = false,
             },
           },
           javascript = {
-            format = { enable = false },
-            -- format = {
-            --   indentSize = vim.o.shiftwidth,
-            --   convertTabsToSpaces = vim.o.expandtab,
-            --   tabSize = vim.o.tabstop,
-            -- },
+            format = {
+              indentSize = vim.o.shiftwidth,
+              convertTabsToSpaces = vim.o.expandtab,
+              tabSize = vim.o.tabstop,
+            },
             inlayHints = {
               includeInlayParameterNameHints = "all",
               includeInlayParameterNameHintsWhenArgumentMatchesName = false,
@@ -90,18 +92,28 @@ return {
       ruff_lsp = {},
 
       sqlls = {},
+
+      lua_ls = {
+        -- mason = false, -- set to false if you don't want this server to be installed with mason
+        -- Use this to add any additional keymaps
+        -- for specific lsp servers
+        ---@type LazyKeys[]
+        -- keys = {},
+        settings = {
+          Lua = {
+            workspace = {
+              checkThirdParty = false,
+            },
+            completion = {
+              callSnippet = "Replace",
+            },
+          },
+        },
+      },
     },
 
     setup = {
       tsserver = function(_, opts)
-        -- require("lazyvim.util").on_attach(function(client, buffer)
-        --   if client.name == "tsserver" then
-        --     -- stylua: ignore
-        --     vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
-        --     -- stylua: ignore
-        --     vim.keymap.set("n", "<leader>cR", "<cmd>TypescriptRenameFile<CR>", { desc = "Rename File", buffer = buffer })
-        --   end
-        -- end)
         require("typescript").setup({ server = opts })
         return true
       end,
@@ -109,9 +121,6 @@ return {
       eslint = function()
         vim.api.nvim_create_autocmd("BufWritePre", {
           callback = function(event)
-            -- if require("lspconfig.util").get_active_client_by_name(event.buf, "eslint") then
-            --   vim.cmd("EslintFixAll")
-            -- end
             if not require("lazyvim.plugins.lsp.format").enabled() then
               -- exit early if autoformat is not enabled
               return
