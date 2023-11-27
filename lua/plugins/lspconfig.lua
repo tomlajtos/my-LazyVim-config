@@ -103,7 +103,9 @@ return {
 
       pyright = {},
 
-      ruff_lsp = {},
+      ruff_lsp = {
+        mason = false,
+      },
 
       sqlls = {},
 
