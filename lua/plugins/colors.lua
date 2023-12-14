@@ -51,7 +51,7 @@ return {
           TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
           TelescopePreviewNormal = { bg = theme.ui.bg_dim },
           TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
-          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend=vim.o.pumblend }, -- add `blend = vim.o.pumblend` to enable transparency
+          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend }, -- add `blend = vim.o.pumblend` to enable transparency
           PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
           PmenuSbar = { bg = theme.ui.bg_m1 },
           PmenuThumb = { bg = theme.ui.bg_p2 },
@@ -81,9 +81,18 @@ return {
       cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
 
       -- toggle theme style ---
-      toggle_style_key = "<F12>", -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
+      -- toggle_style_key = "<F12>", -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
       toggle_style_list = { "dark", "darker", "cool", "deep", "warm", "warmer", "light" }, -- List of styles to toggle between
       lualine = { transparent = true },
+    },
+    keys = {
+      {
+        "<F12>",
+        function()
+          require("onedark").toggle()
+        end,
+        desc = "OneDark styles",
+      },
     },
   },
 
