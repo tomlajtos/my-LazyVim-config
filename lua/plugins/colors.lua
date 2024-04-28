@@ -1,16 +1,17 @@
 return {
-  --  {
-  --    "folke/tokyonight.nvim",
-  --    lazy = false,
-  --    opts = {
-  --      style = "night",
-  --      termguicolors = true,
-  --      styles = {
-  --        sidebars = "transparent",
-  --        floats = "transparent",
-  --      },
-  --    },
-  --  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    opts = {
+      transparent = true,
+      style = "night",
+      termguicolors = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+  },
 
   { "lunarvim/darkplus.nvim" },
   { "EdenEast/nightfox.nvim" },
@@ -99,7 +100,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "tokyonight",
     },
   },
 }
